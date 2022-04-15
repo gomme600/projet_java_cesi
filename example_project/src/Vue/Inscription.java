@@ -31,9 +31,6 @@ public class Inscription extends JFrame {
 	private JButton btnEnregistrer;
 
 
-	/**
-	 * Create the frame.
-	 */
 	public Inscription() {
 		setTitle("Inscription");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
