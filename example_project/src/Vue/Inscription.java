@@ -85,7 +85,7 @@ public class Inscription extends JFrame {
 		panel_1.add(lblMotDePasse);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(92, 75, 89, 20);
+		textField_2.setBounds(90, 77, 89, 20);
 		panel_1.add(textField_2);
 		textField_2.setColumns(10);
 		
