@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Inscription extends JFrame {
 
@@ -51,6 +53,10 @@ public class Inscription extends JFrame {
 		textField.setColumns(10);
 		
 		btnIncrementer = new JButton("Incrementer");
+		btnIncrementer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnIncrementer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -110,6 +116,10 @@ public class Inscription extends JFrame {
 		});
 		btnEnregistrer.setBounds(12, 104, 97, 25);
 		panel_1.add(btnEnregistrer);
+		
+		JLabel titre = new JLabel("Gestion de stock");
+		titre.setBounds(177, 3, 87, 16);
+		contentPane.add(titre);
 	}
 
 	void incrementer() {

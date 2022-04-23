@@ -1,9 +1,12 @@
 package Controleur;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import BDD.GestionBDD;
 import Vue.Inscription;
+
+import java.io.IOException;
 
 public class GestionPresence {
 
@@ -31,7 +34,12 @@ public class GestionPresence {
 	public static void enregistrerUtilisateur(String nom) {
 		GestionBDD g = new GestionBDD();
 		
-		g.enregistrerNewUser(nom); 
+		try {
+			g.enregistrerNewUser(nom);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }
