@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
-public class Formateur extends JFrame {
+public class Responsable extends JFrame {
 
 	private JPanel contentPane;
 	JLabel lblNewLabel;
@@ -20,7 +20,7 @@ public class Formateur extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Formateur frame = new Formateur();
+					Etudiant frame = new Etudiant();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,8 +32,8 @@ public class Formateur extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Formateur() {
-		setTitle("Enseignant");
+	public Responsable() {
+		setTitle("Responsable");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,18 +42,18 @@ public class Formateur extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(84, 71, 287, 33);
+		lblNewLabel.setBounds(43, 45, 256, 39);
 		contentPane.add(lblNewLabel);
 	}
 
-	
 	public JLabel getLblNewLabel() {
 		return lblNewLabel;
 	}
 
 	public void setLblNewLabel(String nom) {
-		this.lblNewLabel.setText(nom); 
+		this.lblNewLabel.setText(nom);
 	}
-
 	
+	
+
 }

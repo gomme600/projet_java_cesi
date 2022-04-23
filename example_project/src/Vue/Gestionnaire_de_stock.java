@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
-public class Etudiant extends JFrame {
+public class Gestionnaire_de_stock extends JFrame {
 
 	private JPanel contentPane;
 	JLabel lblNewLabel;
@@ -32,8 +32,8 @@ public class Etudiant extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Etudiant() {
-		setTitle("Etudiant");
+	public Gestionnaire_de_stock() {
+		setTitle("Gestionnaire de stock");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

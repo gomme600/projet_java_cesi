@@ -14,87 +14,50 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Enumeration;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import java.awt.TextField;
+import javax.swing.SwingConstants;
 
 public class Inscription extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	JPanel panel = new JPanel();
-	JButton btnIncrementer ;
-	JButton btnDcrementer;
 	JPanel panel_1 ;
-	private JLabel lblCompteur;
 	int compteur = 0;
 	private JTextField textField_1;
 	private JLabel lblUtilisateur;
 	private JButton btnConnexion;
 	private JButton btnEnregistrer;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JTextField textField_2;
+	private JLabel lblstatus;
 
 
 	public Inscription() {
 		setTitle("Inscription");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 451, 301);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-			
-		panel.setBounds(12, 30, 230, 197);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setText("0");
-		textField.setBounds(12, 55, 116, 22);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		btnIncrementer = new JButton("Incrementer");
-		btnIncrementer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnIncrementer.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// code qui correspond au click de la sourie
-				incrementer();
-				
-			}
-		});
-		btnIncrementer.setBounds(12, 90, 97, 25);
-		panel.add(btnIncrementer);
-		
-		btnDcrementer = new JButton("D\u00E9crementer");
-		btnDcrementer.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				decrementer(); 
-			}
-			
-		});
-		btnDcrementer.setBounds(12, 135, 97, 25);
-		panel.add(btnDcrementer);
-		
-		lblCompteur = new JLabel("compteur");
-		lblCompteur.setBounds(12, 13, 56, 16);
-		panel.add(lblCompteur);
 		
 		panel_1 = new JPanel();
-		panel_1.setBounds(258, 27, 162, 200);
+		panel_1.setBounds(229, 27, 191, 200);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(12, 62, 116, 22);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
+		setTextField_1(new JTextField());
+		getTextField_1().setBounds(90, 38, 89, 22);
+		panel_1.add(getTextField_1());
+		getTextField_1().setColumns(10);
 		
 		lblUtilisateur = new JLabel("utilisateur");
-		lblUtilisateur.setBounds(12, 23, 56, 16);
+		lblUtilisateur.setBounds(10, 41, 69, 16);
 		panel_1.add(lblUtilisateur);
 		
 		btnConnexion = new JButton("Connexion");
@@ -104,7 +67,7 @@ public class Inscription extends JFrame {
 				seconecter();
 			}
 		});
-		btnConnexion.setBounds(12, 142, 97, 25);
+		btnConnexion.setBounds(31, 150, 130, 25);
 		panel_1.add(btnConnexion);
 		
 		btnEnregistrer = new JButton("Enregistrer");
@@ -114,45 +77,113 @@ public class Inscription extends JFrame {
 				EnregisterNouveauUtilisateur();
 			}
 		});
-		btnEnregistrer.setBounds(12, 104, 97, 25);
+		btnEnregistrer.setBounds(31, 114, 130, 25);
 		panel_1.add(btnEnregistrer);
 		
+		JLabel lblMotDePasse = new JLabel("mot de passe");
+		lblMotDePasse.setBounds(10, 77, 78, 16);
+		panel_1.add(lblMotDePasse);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(92, 75, 89, 20);
+		panel_1.add(textField_2);
+		textField_2.setColumns(10);
+		
 		JLabel titre = new JLabel("Gestion de stock");
-		titre.setBounds(177, 3, 87, 16);
+		titre.setBounds(175, 6, 181, 16);
 		contentPane.add(titre);
-	}
-
-	void incrementer() {
-		compteur ++;
-		textField.setText(""+compteur);
-	}
-	
-	void decrementer() {
-		compteur --;
-		textField.setText(""+compteur);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Gestionnaire de stock");
+		rdbtnNewRadioButton.setSelected(true);
+		buttonGroup.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setBounds(63, 48, 173, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Caissier");
+		buttonGroup.add(rdbtnNewRadioButton_1);
+		rdbtnNewRadioButton_1.setBounds(63, 87, 173, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Responsable");
+		buttonGroup.add(rdbtnNewRadioButton_2);
+		rdbtnNewRadioButton_2.setBounds(63, 135, 173, 23);
+		contentPane.add(rdbtnNewRadioButton_2);
+		
+		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Gestionnaire de commande");
+		buttonGroup.add(rdbtnNewRadioButton_3);
+		rdbtnNewRadioButton_3.setBounds(63, 180, 173, 23);
+		contentPane.add(rdbtnNewRadioButton_3);
+		
+		lblstatus = new JLabel("");
+		lblstatus.setBounds(148, 241, 173, 14);
+		contentPane.add(lblstatus);
 	}
 	
 	void seconecter() {
-		// lire le contenu de la zone de texte et le comparer avec Alain et Ihab
-		String utilisateur = textField_1.getText();
+		// lire le contenu de la zone de texte et le comparer avec la base de donnees
+		String utilisateur = getTextField_1().getText();
+		String mdp = getTextField_2().getText();
 		
-		if(utilisateur.equals("Ihab")) {
-			//ouvrir une fenetre enseignant
-			Formateur frame = new Formateur();
-			frame.setLblNewLabel("Ihab");
+		int res = GestionPresence.verifierUtilisateur(utilisateur, mdp);
+
+		if(res == 0) {
+			//ouvrir une fenetre
+			Gestionnaire_de_stock frame = new Gestionnaire_de_stock();
+			frame.setLblNewLabel(utilisateur);
 			frame.setVisible(true);
 		}
 		
-		if(utilisateur.equals("Alain")){
-			//ouvrir une fenetre etudiant
-			Etudiant frame = new Etudiant();
-			frame.setLblNewLabel("Alain");
+		if(res == 1) {
+			//ouvrir une fenetre
+			Caissier frame = new Caissier();
+			frame.setLblNewLabel(utilisateur);
 			frame.setVisible(true);
 		}
+		
+		if(res == 2) {
+			//ouvrir une fenetre
+			Responsable frame = new Responsable();
+			frame.setLblNewLabel(utilisateur);
+			frame.setVisible(true);
+		}
+		
+		if(res == 3) {
+			//ouvrir une fenetre
+			Gestionnaire_de_commande frame = new Gestionnaire_de_commande();
+			frame.setLblNewLabel(utilisateur);
+			frame.setVisible(true);
+		}
+		
+		if(res == 4) {
+			//Changer status
+			lblstatus.setText("Utilisateur invalide");
+		}
+		
 	}
 	
 	void EnregisterNouveauUtilisateur() {
-		String nom = textField_1.getText();
-		GestionPresence.enregistrerUtilisateur(nom);
+		String nom = getTextField_1().getText();
+		String pass = getTextField_2().getText();
+		String user_type = null;
+		for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+		        AbstractButton button = buttons.nextElement();
+		        if (button.isSelected()) {
+		               user_type = button.getText();
+		        }
+		    }
+		
+		GestionPresence.enregistrerUtilisateur(nom, pass, user_type);
+	}
+
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+	public void setTextField_1(JTextField textField_1) {
+		this.textField_1 = textField_1;
 	}
 }
