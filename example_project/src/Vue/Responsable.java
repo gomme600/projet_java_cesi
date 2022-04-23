@@ -97,11 +97,6 @@ public class Responsable extends JFrame {
 		gbc_listproduits.gridy = 0;
 		panel.add(listproduits, gbc_listproduits);
 		
-		JButton btnCommander = new JButton("Commander");
-		btnCommander.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		
 		
 		JButton btnNewButton = new JButton("Rafraichir");
@@ -138,12 +133,24 @@ public class Responsable extends JFrame {
 		panel.add(btnNewButton, gbc_btnNewButton);
 		//panel.setLayout(null);
 	
-		
+		JButton btnCommander = new JButton("Commander");
+		btnCommander.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            int index = listproduits.getSelectedIndex();
+	            System.out.println("Index Selected: " + index);
+	            String s = (String) listproduits.getSelectedValue();
+	            System.out.println("Value Selected: " + s);
+			}
+		});
 
 		
 		JButton btnModifier = new JButton("Modifier");
 		btnModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		            int index = listproduits.getSelectedIndex();
+		            System.out.println("Index Selected: " + index);
+		            String s = (String) listproduits.getSelectedValue();
+		            System.out.println("Value Selected: " + s);
 			}
 		});
 		btnModifier.setBounds(279, 82, 113, 23);
@@ -206,16 +213,24 @@ public class Responsable extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_1.gridx = 3;
 		gbc_btnNewButton_1.gridy = 0;
 		panel_1.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		JButton btnSuppr = new JButton("Supprimer");
+		btnSuppr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            int index = list_1.getSelectedIndex();
+	            System.out.println("Index Selected: " + index);
+	            String s = (String) list_1.getSelectedValue();
+	            System.out.println("Value Selected: " + s);
+			}
+		});
 		btnSuppr.setBounds(274, 105, 114, 23);
 		GridBagConstraints gbc_btnSuppr = new GridBagConstraints();
-		gbc_btnSuppr.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnSuppr.anchor = GridBagConstraints.WEST;
 		gbc_btnSuppr.gridx = 4;
 		gbc_btnSuppr.gridy = 0;
 		panel_1.add(btnSuppr, gbc_btnSuppr);
