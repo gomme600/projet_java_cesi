@@ -151,6 +151,15 @@ public class Responsable extends JFrame {
 		            System.out.println("Index Selected: " + index);
 		            String s = (String) listproduits.getSelectedValue();
 		            System.out.println("Value Selected: " + s);
+		            
+		            String[] splited = s.split("\\s+");
+		            
+		            //ouvrir une fenetre
+					Modifier_produit frame = new Modifier_produit();
+					frame.setName(splited[0]);
+					frame.setQuantite(splited[5]);
+					frame.setPrix(splited[2]);
+					frame.setVisible(true);
 			}
 		});
 		btnModifier.setBounds(279, 82, 113, 23);

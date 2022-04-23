@@ -2,17 +2,26 @@ package BDD;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Scanner;
+
+import javax.swing.DefaultListModel;
+
 import static org.junit.Assert.*;
 
 
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 
 public class GestionBDD {
@@ -80,6 +89,60 @@ public class GestionBDD {
 		            }
 		            return 4;
 		       }
+		
+	}
+	
+	public int modifierProduit(String nom, String prix, String quantite) throws IOException
+	{
+		
+		    String fileName="./produits.db";
+		
+			try {
+			FileInputStream fstream = new FileInputStream(fileName);
+		    DataInputStream in = new DataInputStream(fstream);
+		    LineNumberReader br = new LineNumberReader(new InputStreamReader(in));
+			String strLine;
+			//while ((strLine = br.readLine()) != nom+" - "+prix+" e - "+quantite) 
+			while ((strLine = br.readLine()) != null)
+			{
+				    if(strLine.contains(nom))
+				    {
+				    	System.out.println("line number " + br.getLineNumber() + " = " + strLine);
+				    	
+				    	
+				        //Instantiating the Scanner class to read the file
+				        Scanner sc = new Scanner(new File(fileName));
+				        //instantiating the StringBuffer class
+				        StringBuffer buffer = new StringBuffer();
+				        //Reading lines of the file and appending them to StringBuffer
+				        while (sc.hasNextLine()) {
+				           buffer.append(sc.nextLine()+System.lineSeparator());
+				        }
+				        String fileContents = buffer.toString();
+				        System.out.println("Contents of the file: "+fileContents);
+				        //closing the Scanner object
+				        sc.close();
+				        String oldLine = nom+" - "+"[0-9]*"+" e - "+"[0-9]*";
+				        String newLine = nom+" - "+prix+" e - "+quantite;
+				        //Replacing the old line with new line
+				        fileContents = fileContents.replaceAll(oldLine, newLine);
+				        //instantiating the FileWriter class
+				        FileWriter writer = new FileWriter(fileName);
+				        System.out.println("");
+				        System.out.println("new data: "+fileContents);
+				        writer.append(fileContents);
+				        writer.flush();
+				        writer.close();
+				        
+				    }
+			}
+			in.close();
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
+		
+		return 1; 
 		
 	}
 	
