@@ -393,4 +393,68 @@ public class GestionBDD {
 		
 	}
 	
+
+	public int decrementeProduit(String nom, String quantite) throws IOException
+	{
+		    String fileName2="./produits.db";
+		
+			try {
+				
+			FileInputStream fstream2 = new FileInputStream(fileName2);
+		    DataInputStream in2 = new DataInputStream(fstream2);
+		    LineNumberReader br2 = new LineNumberReader(new InputStreamReader(in2));
+			String strLine2;
+			
+						while ((strLine2 = br2.readLine()) != null)
+						{
+							    if(strLine2.contains(nom))
+							    {
+
+				        //Instantiating the Scanner class to read the file
+				        Scanner sc = new Scanner(new File(fileName2));
+				        //instantiating the StringBuffer class
+				        StringBuffer buffer = new StringBuffer();
+				        //Reading lines of the file and appending them to StringBuffer
+				        while (sc.hasNextLine()) {
+				           buffer.append(sc.nextLine()+System.lineSeparator());
+				        }
+				        String fileContents = buffer.toString();
+				        System.out.println("Contents of the file: "+fileContents);
+				        //closing the Scanner object
+				        sc.close();
+				        System.out.println("Splitting : "+strLine2);
+				        String[] data = strLine2.split(" ");
+				        System.out.println("Getting price");
+				        String prix = data[2];
+				        System.out.println("Getting quantity");
+				        String old_quantite = data[5];
+				        int old_quantite_int = Integer.parseInt(old_quantite);
+				        int new_quantite_int = Integer.parseInt(quantite);
+				        System.out.println("Old quantity: "+old_quantite);
+				        System.out.println("New quantity: "+quantite);
+				        String oldLine = nom+" - "+"[0-9]*"+" e - "+"[0-9]*";
+				        String newLine = nom+" - "+prix+" e - "+Integer.toString((old_quantite_int-new_quantite_int));
+				        //Replacing the old line with new line
+				        fileContents = fileContents.replaceAll(oldLine, newLine);
+				        //instantiating the FileWriter class
+				        FileWriter writer = new FileWriter(fileName2);
+				        System.out.println("");
+				        System.out.println("new data: "+fileContents);
+				        writer.append(fileContents);
+				        writer.flush();
+				        writer.close();
+				        
+				        
+				    }
+			}
+			in2.close();
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
+		
+		return 1; 
+		
+	}
+	
 }
