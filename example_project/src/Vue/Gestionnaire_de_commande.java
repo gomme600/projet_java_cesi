@@ -71,7 +71,7 @@ public class Gestionnaire_de_commande extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Portail Gestionnaire de commande");
-		lblNewLabel_1.setBounds(255, 23, 183, 14);
+		lblNewLabel_1.setBounds(221, 23, 217, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -125,6 +125,25 @@ public class Gestionnaire_de_commande extends JFrame {
 	            String[] splited = s.split("\\s+");
 	            
 	            commandes.supprimerCommande(splited[0]);
+	            
+				try {
+				FileInputStream fstream = new FileInputStream("./commandes.db");
+			    DataInputStream in = new DataInputStream(fstream);
+			    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				DefaultListModel listModel2 = new DefaultListModel();
+				String strLine;
+				while ((strLine = br.readLine()) != null)   
+				{
+				        listModel2.addElement(strLine); 
+				        System.out.println(strLine); 
+				}
+
+				list_1.setModel(listModel2);
+				in.close();
+				}
+			    catch (Exception ee) {
+			    	System.out.println(ee); 
+			    }
 				
 			}
 		});
@@ -144,6 +163,26 @@ public class Gestionnaire_de_commande extends JFrame {
 	            
 	            commandes.approuveCommande(splited[0], splited[1]);
 	            commandes.supprimerCommande(splited[0]);
+	            
+				try {
+				FileInputStream fstream = new FileInputStream("./commandes.db");
+			    DataInputStream in = new DataInputStream(fstream);
+			    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				DefaultListModel listModel2 = new DefaultListModel();
+				String strLine;
+				while ((strLine = br.readLine()) != null)   
+				{
+				        listModel2.addElement(strLine); 
+				        System.out.println(strLine); 
+				}
+
+				list_1.setModel(listModel2);
+				in.close();
+				}
+			    catch (Exception ee) {
+			    	System.out.println(ee); 
+			    }
+				
 			}
 		});
 		btnNewButton_1_1.setBounds(312, 89, 95, 23);
@@ -213,7 +252,44 @@ public class Gestionnaire_de_commande extends JFrame {
 		panel.add(btnModifier);
 		
 
+		//Rafraichir les 2 listes lors du chargement de la fenetre
+		try {
+		FileInputStream fstream = new FileInputStream("./commandes.db");
+	    DataInputStream in = new DataInputStream(fstream);
+	    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		DefaultListModel listModel2 = new DefaultListModel();
+		String strLine;
+		while ((strLine = br.readLine()) != null)   
+		{
+		        listModel2.addElement(strLine); 
+		        System.out.println(strLine); 
+		}
+
+		list_1.setModel(listModel2);
+		in.close();
+		}
+	    catch (Exception ee) {
+	    	System.out.println(ee); 
+	    }
 		
+		try {
+			FileInputStream fstream = new FileInputStream("./produits.db");
+		    DataInputStream in = new DataInputStream(fstream);
+		    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			DefaultListModel listModel = new DefaultListModel();
+			String strLine;
+			while ((strLine = br.readLine()) != null)   
+			{
+			        listModel.addElement(strLine); 
+			        System.out.println(strLine);
+			}
+
+			listproduits.setModel(listModel);
+			in.close();
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
 	}
 
 	public JLabel getLblNewLabel() {
