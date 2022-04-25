@@ -322,10 +322,22 @@ public class GestionBDD {
 		    DataInputStream in = new DataInputStream(fstream);
 		    LineNumberReader br = new LineNumberReader(new InputStreamReader(in));
 			String strLine;
+			
+			FileInputStream fstream2 = new FileInputStream(fileName2);
+		    DataInputStream in2 = new DataInputStream(fstream2);
+		    LineNumberReader br2 = new LineNumberReader(new InputStreamReader(in2));
+			String strLine2;
+			
 			while ((strLine = br.readLine()) != null)
 			{
 				    if(strLine.contains(nom))
 				    {
+				    	
+						while ((strLine2 = br2.readLine()) != null)
+						{
+							    if(strLine2.contains(nom))
+							    {
+
 				    	System.out.println("line number " + br.getLineNumber() + " = " + strLine);
 				    	
 				    	
@@ -341,8 +353,8 @@ public class GestionBDD {
 				        System.out.println("Contents of the file: "+fileContents);
 				        //closing the Scanner object
 				        sc.close();
-				        System.out.println("Splitting : "+strLine);
-				        String[] data = strLine.split(" ");
+				        System.out.println("Splitting : "+strLine2);
+				        String[] data = strLine2.split(" ");
 				        System.out.println("Getting price");
 				        String prix = data[2];
 				        System.out.println("Getting quantity");
@@ -356,17 +368,22 @@ public class GestionBDD {
 				        //Replacing the old line with new line
 				        fileContents = fileContents.replaceAll(oldLine, newLine);
 				        //instantiating the FileWriter class
-				        FileWriter writer = new FileWriter(fileName);
+				        FileWriter writer = new FileWriter(fileName2);
 				        System.out.println("");
 				        System.out.println("new data: "+fileContents);
 				        writer.append(fileContents);
 				        writer.flush();
 				        writer.close();
 				        
+							    }
+						}
+						
+				        
 				        
 				    }
 			}
 			in.close();
+			in2.close();
 			}
 		    catch (Exception ee) {
 		    	System.out.println(ee); 
