@@ -29,4 +29,15 @@ public class commandes {
 		} 
 	}
 	
+	public static void approuveCommande(String nom, String quantite) {
+		GestionBDD g = new GestionBDD();
+		
+		try {
+			g.approuveCommande(nom, quantite);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 }
