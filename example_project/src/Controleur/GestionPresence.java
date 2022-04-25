@@ -31,15 +31,17 @@ public class GestionPresence {
 	}
 	
 	
-	public static void enregistrerUtilisateur(String nom, String pass, String type) {
+	public static int enregistrerUtilisateur(String nom, String pass, String type) {
 		GestionBDD g = new GestionBDD();
 		
 		try {
-			g.enregistrerNewUser(nom, pass, type);
+			int status = g.enregistrerNewUser(nom, pass, type);
+			return status;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		return 1;
 	}
 	
 	public static int verifierUtilisateur(String nom, String mdp) {
