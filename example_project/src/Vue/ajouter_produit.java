@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 import Modele.produit;
 
-public class Modifier_produit extends JFrame {
+public class ajouter_produit extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -43,8 +43,8 @@ public class Modifier_produit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Modifier_produit() {
-		setTitle("Modifier Produit");
+	public ajouter_produit() {
+		setTitle("Ajouter produit");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 357, 300);
 		contentPane = new JPanel();
@@ -57,7 +57,6 @@ public class Modifier_produit extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setEditable(false);
 		textField.setBounds(156, 67, 96, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
