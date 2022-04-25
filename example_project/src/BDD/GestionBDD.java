@@ -255,8 +255,6 @@ public class GestionBDD {
 			    out.flush();
 			    out.close();
 			    Files.move(temp.toPath(), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
-			    boolean success = temp.renameTo(file);
-			    System.out.println("File overwrite status : "+success);
 			}
 		    catch (Exception ee) {
 		    	System.out.println(ee); 
