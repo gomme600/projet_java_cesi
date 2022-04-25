@@ -93,25 +93,6 @@ public class Caissier extends JFrame {
 						listproduits.setBorder(new LineBorder(new Color(0, 0, 0)));
 						listproduits.setBounds(0, 0, 330, 416);
 						panel.add(listproduits);
-				
-						try {
-							FileInputStream fstream = new FileInputStream("./produits.db");
-						    DataInputStream in = new DataInputStream(fstream);
-						    BufferedReader br = new BufferedReader(new InputStreamReader(in));
-							DefaultListModel listModel = new DefaultListModel();
-							String strLine;
-							while ((strLine = br.readLine()) != null)   
-							{
-							        listModel.addElement(strLine); 
-							        System.out.println(strLine);
-							}
-
-							listproduits.setModel(listModel);
-							in.close();
-							}
-						    catch (Exception ee) {
-						    	System.out.println(ee); 
-						    }
 								
 								JButton btnDelete = new JButton("Bip boup");
 								btnDelete.addActionListener(new ActionListener() {
@@ -162,6 +143,27 @@ public class Caissier extends JFrame {
 								textField.setBounds(433, 114, 86, 20);
 								panel.add(textField);
 								textField.setColumns(10);
+								
+								
+								//Rafraichir la liste lors du chargement de la fenetre
+								try {
+									FileInputStream fstream = new FileInputStream("./produits.db");
+								    DataInputStream in = new DataInputStream(fstream);
+								    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+									DefaultListModel listModel = new DefaultListModel();
+									String strLine;
+									while ((strLine = br.readLine()) != null)   
+									{
+									        listModel.addElement(strLine); 
+									        System.out.println(strLine);
+									}
+
+									listproduits.setModel(listModel);
+									in.close();
+									}
+								    catch (Exception ee) {
+								    	System.out.println(ee); 
+								    }
 		
 
 		

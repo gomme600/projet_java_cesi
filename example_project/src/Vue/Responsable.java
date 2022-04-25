@@ -81,13 +81,13 @@ public class Responsable extends JFrame {
 		JList listproduits = new JList();
 		listproduits.setBackground(Color.WHITE);
 		listproduits.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listproduits.setBounds(0, 0, 306, 178);
+		listproduits.setBounds(0, 0, 281, 178);
 		panel.add(listproduits);
 		
 		
 		//Ajout de bouton
 		JButton btnNewButton = new JButton("Rafraichir");
-		btnNewButton.setBounds(316, 43, 91, 23);
+		btnNewButton.setBounds(291, 43, 116, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Button pressed !");
@@ -128,7 +128,7 @@ public class Responsable extends JFrame {
 	            //ouvrir une fenetre
 				Creer_commande frame = new Creer_commande();
 				frame.setName(splited[0]);
-				frame.setQuantite("0");
+				//frame.setQuantite("0");
 				frame.setVisible(true);
 			}
 		});
@@ -152,9 +152,9 @@ public class Responsable extends JFrame {
 					frame.setVisible(true);
 			}
 		});
-		btnModifier.setBounds(316, 111, 91, 23);
+		btnModifier.setBounds(291, 111, 116, 23);
 		panel.add(btnModifier);
-		btnCommander.setBounds(316, 77, 91, 23);
+		btnCommander.setBounds(291, 77, 116, 23);
 		panel.add(btnCommander);
 		
 		//Ajout de tab Commandes

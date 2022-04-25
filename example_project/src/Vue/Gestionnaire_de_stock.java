@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import Modele.commandes;
 import Modele.produit;
 
 import java.awt.Color;
@@ -39,22 +40,6 @@ public class Gestionnaire_de_stock extends JFrame {
 	protected static Object listproduits;
 	private JPanel contentPane;
 	JLabel lblNewLabel;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Etudiant frame = new Etudiant();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the frame.
@@ -92,27 +77,8 @@ public class Gestionnaire_de_stock extends JFrame {
 						listproduits.setBounds(0, 0, 330, 416);
 						panel.add(listproduits);
 				
-						try {
-							FileInputStream fstream = new FileInputStream("./produits.db");
-						    DataInputStream in = new DataInputStream(fstream);
-						    BufferedReader br = new BufferedReader(new InputStreamReader(in));
-							DefaultListModel listModel = new DefaultListModel();
-							String strLine;
-							while ((strLine = br.readLine()) != null)   
-							{
-							        listModel.addElement(strLine); 
-							        System.out.println(strLine);
-							}
-
-							listproduits.setModel(listModel);
-							in.close();
-							}
-						    catch (Exception ee) {
-						    	System.out.println(ee); 
-						    }
-				
 				JButton btnNewButton = new JButton("Rafraichir");
-				btnNewButton.setBounds(340, 136, 108, 62);
+				btnNewButton.setBounds(342, 85, 108, 62);
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println("Button pressed !");
@@ -158,7 +124,7 @@ public class Gestionnaire_de_stock extends JFrame {
 											frame.setVisible(true);
 									}
 								});
-								btnModifier.setBounds(476, 136, 108, 62);
+								btnModifier.setBounds(478, 85, 108, 62);
 								panel.add(btnModifier);
 								
 								JButton btnDelete = new JButton("Supprimer");
@@ -194,7 +160,7 @@ public class Gestionnaire_de_stock extends JFrame {
 										
 									}
 								});
-								btnDelete.setBounds(340, 220, 108, 62);
+								btnDelete.setBounds(342, 169, 108, 62);
 								panel.add(btnDelete);
 								
 								JButton btnAjouter = new JButton("Ajouter");
@@ -207,8 +173,153 @@ public class Gestionnaire_de_stock extends JFrame {
 										
 									}
 								});
-								btnAjouter.setBounds(476, 220, 108, 62);
+								btnAjouter.setBounds(478, 169, 108, 62);
 								panel.add(btnAjouter);
+								
+								JButton btnCommander = new JButton("Commander");
+								btnCommander.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+							            int index = listproduits.getSelectedIndex();
+							            System.out.println("Index Selected: " + index);
+							            String s = (String) listproduits.getSelectedValue();
+							            System.out.println("Value Selected: " + s);
+							            
+							            String[] splited = s.split("\\s+");
+							            
+							            //ouvrir une fenetre
+										Creer_commande frame = new Creer_commande();
+										frame.setName(splited[0]);
+										//frame.setQuantite("0");
+										frame.setVisible(true);
+									}
+								});
+								btnCommander.setBounds(413, 250, 108, 62);
+								panel.add(btnCommander);
+								
+								
+								//Ajout de tab Commandes
+								JPanel panel_1 = new JPanel();
+								tabbedPane.addTab("Commandes", null, panel_1, null);
+								panel_1.setLayout(null);
+								
+								//Ajout de liste
+								JList list_1 = new JList();
+								list_1.setBounds(0, 0, 377, 416);
+								panel_1.add(list_1);
+								
+								//Ajout de bouton
+								JButton btnNewButton_1 = new JButton("Rafraichir");
+								btnNewButton_1.setBounds(445, 112, 107, 71);
+								btnNewButton_1.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										System.out.println("Button pressed !");
+										//Rafraichir la liste
+										try {
+										//Fichier a charger
+										FileInputStream fstream = new FileInputStream("./commandes.db");
+									    DataInputStream in = new DataInputStream(fstream);
+									    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+										DefaultListModel listModel2 = new DefaultListModel();
+										String strLine;
+										//Balayer toutes les lignes
+										while ((strLine = br.readLine()) != null)   
+										{
+											    //Ajouter chaque ligne a une liste modele
+										        listModel2.addElement(strLine); 
+										        System.out.println(strLine); 
+										}
+
+										//appliquer la liste modele a notre liste
+										list_1.setModel(listModel2);
+										//Fermer le document
+										in.close();
+										}
+									    catch (Exception ee) {
+									    	System.out.println(ee); 
+									    }
+									}
+								});
+								panel_1.add(btnNewButton_1);
+								
+								//Action pour le bouton supprimer
+								JButton btnSuppr = new JButton("Supprimer");
+								btnSuppr.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										//Affichier et obtenir la selection de la liste
+							            int index = list_1.getSelectedIndex();
+							            System.out.println("Index Selected: " + index);
+							            String s = (String) list_1.getSelectedValue();
+							            System.out.println("Value Selected: " + s);
+							            
+							            String[] splited = s.split("\\s+");
+							            
+							            //Appeler la methode supprimerCommande
+							            commandes.supprimerCommande(splited[0]);
+							            
+							            //Rafraichir la liste
+							            try {
+											FileInputStream fstream = new FileInputStream("./commandes.db");
+										    DataInputStream in = new DataInputStream(fstream);
+										    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+											DefaultListModel listModel2 = new DefaultListModel();
+											String strLine;
+											while ((strLine = br.readLine()) != null)   
+											{
+											        listModel2.addElement(strLine); 
+											        System.out.println(strLine); 
+											}
+
+											list_1.setModel(listModel2);
+											in.close();
+											}
+										    catch (Exception ee) {
+										    	System.out.println(ee); 
+										    }
+										
+									}
+								});
+								btnSuppr.setBounds(445, 224, 107, 76);
+								panel_1.add(btnSuppr);
+								
+								
+								
+								//Rafraichir les 2 listes lors du chargement de la fenetre
+								try {
+								FileInputStream fstream = new FileInputStream("./produits.db");
+							    DataInputStream in = new DataInputStream(fstream);
+							    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+								DefaultListModel listModel = new DefaultListModel();
+								String strLine;
+								while ((strLine = br.readLine()) != null)   
+								{
+								        listModel.addElement(strLine); 
+								        System.out.println(strLine);
+								}
+
+								listproduits.setModel(listModel);
+								in.close();
+								}
+							    catch (Exception ee) {
+							    	System.out.println(ee); 
+							    }
+						        try {
+									FileInputStream fstream = new FileInputStream("./commandes.db");
+								    DataInputStream in = new DataInputStream(fstream);
+								    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+									DefaultListModel listModel2 = new DefaultListModel();
+									String strLine;
+									while ((strLine = br.readLine()) != null)   
+									{
+									        listModel2.addElement(strLine); 
+									        System.out.println(strLine); 
+									}
+
+									list_1.setModel(listModel2);
+									in.close();
+									}
+								    catch (Exception ee) {
+								    	System.out.println(ee); 
+								    }
 		
 
 		
