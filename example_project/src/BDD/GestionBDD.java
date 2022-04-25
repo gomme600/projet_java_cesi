@@ -17,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultListModel;
 
@@ -41,6 +43,20 @@ public class GestionBDD {
 		
 		    String fileName="./database.db";
 		
+		    try (FileReader fileInvc = new FileReader(fileName);
+		            BufferedReader readervc = new BufferedReader(fileInvc)) {
+		            String readvc = readervc.readLine();
+		            while (readvc != null) {
+		            	Pattern p = Pattern.compile(nom+"\\+[.]*");
+		            	Matcher m = p.matcher(readvc);
+		            	if (m.find()) {
+		                	System.out.println("Utilisateur existe : "+readvc);
+		                	return 1;
+		                }
+		                readvc = readervc.readLine();
+		            }
+		       }
+		    
 		    FileWriter fileWriter = null;
 			try {
 				fileWriter = new FileWriter(fileName, true);
@@ -64,7 +80,7 @@ public class GestionBDD {
 				}
 			}
 		
-		return 1; 
+		return 0; 
 		
 	}
 	

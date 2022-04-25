@@ -172,7 +172,15 @@ public class Inscription extends JFrame {
 		        }
 		    }
 		
-		GestionPresence.enregistrerUtilisateur(nom, pass, user_type);
+		int status = GestionPresence.enregistrerUtilisateur(nom, pass, user_type);
+		if (status == 0)
+		{
+			lblstatus.setText("Utilisateur enregistre !");
+		}
+		else
+		{
+			lblstatus.setText("Utilisateur existe deja !");
+		}
 	}
 
 	public JTextField getTextField_2() {
@@ -186,4 +194,5 @@ public class Inscription extends JFrame {
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;
 	}
+	
 }
