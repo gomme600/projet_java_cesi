@@ -29,6 +29,16 @@ public class produit {
 		} 
 	}
 	
+	public static void decrementeProduit(String nom, String quantite) {
+		GestionBDD g = new GestionBDD();
+		
+		try {
+			g.decrementeProduit(nom, quantite);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 	public static void supprimerProduit(String nom) {
 		GestionBDD g = new GestionBDD();
 		
