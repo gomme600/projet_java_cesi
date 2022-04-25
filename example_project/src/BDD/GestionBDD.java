@@ -84,6 +84,31 @@ public class GestionBDD {
 		
 	}
 	
+	public int supprimerUtilisateur(String nom) throws IOException
+	{
+		
+	    String fileName="./database.db";
+	
+		try {
+			System.out.println("Element a supprimer : "+nom);
+		    File file = new File(fileName);
+		    File temp = new File("./_temp_");
+		    PrintWriter out = new PrintWriter(new FileWriter(temp));
+		    Files.lines(file.toPath())
+		        .filter(line -> !line.contains(nom))
+		        .forEach(out::println);
+		    out.flush();
+		    out.close();
+		    Files.move(temp.toPath(), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		}
+	    catch (Exception ee) {
+	    	System.out.println(ee); 
+	    }
+	
+	return 1; 
+	
+}
+	
 	public int verifierUtilisateur(String nom, String mdp) throws IOException
 	{
 		
@@ -302,6 +327,8 @@ public class GestionBDD {
 		return 1; 
 		
 	}
+	
+	
 	public int supprimerProduit(String nom) throws IOException
 	{
 		

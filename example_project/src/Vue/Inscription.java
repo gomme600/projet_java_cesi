@@ -35,6 +35,7 @@ public class Inscription extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textField_2;
 	private JLabel lblstatus;
+	private JButton btnNewButton;
 
 
 	public Inscription() {
@@ -115,8 +116,19 @@ public class Inscription extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_3);
 		
 		lblstatus = new JLabel("");
-		lblstatus.setBounds(148, 241, 173, 14);
+		lblstatus.setBounds(10, 243, 173, 14);
 		contentPane.add(lblstatus);
+		
+		btnNewButton = new JButton("Gestion des utilisateurs");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ouvrir une fenetre
+				Gestion_utilisateurs frame = new Gestion_utilisateurs();
+				frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(229, 238, 191, 23);
+		contentPane.add(btnNewButton);
 	}
 	
 	void seconecter() {
