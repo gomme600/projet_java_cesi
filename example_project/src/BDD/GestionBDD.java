@@ -8,9 +8,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
@@ -137,6 +142,121 @@ public class GestionBDD {
 				    }
 			}
 			in.close();
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
+		
+		return 1; 
+		
+	}
+	
+	
+	
+	
+	public int creerCommande(String nom, String quantite) throws IOException
+	{
+		
+		    String fileName="./commandes.db";
+		
+			try {
+			FileInputStream fstream = new FileInputStream(fileName);
+		    DataInputStream in = new DataInputStream(fstream);
+		    LineNumberReader br = new LineNumberReader(new InputStreamReader(in));
+			String strLine;
+			int found = 0;
+			while ((strLine = br.readLine()) != null)
+			{
+				    if(strLine.contains(nom))
+				    {
+				    	System.out.println("line number " + br.getLineNumber() + " = " + strLine);
+				    	
+				    	
+				        //Instantiating the Scanner class to read the file
+				        Scanner sc = new Scanner(new File(fileName));
+				        //instantiating the StringBuffer class
+				        StringBuffer buffer = new StringBuffer();
+				        //Reading lines of the file and appending them to StringBuffer
+				        while (sc.hasNextLine()) {
+				           buffer.append(sc.nextLine()+System.lineSeparator());
+				        }
+				        String fileContents = buffer.toString();
+				        System.out.println("Contents of the file: "+fileContents);
+				        //closing the Scanner object
+				        sc.close();
+				        String[] old_quantity = strLine.split("\\+");
+				        String old_quantite = old_quantity[1];
+				        int old_quantite_int = Integer.parseInt(old_quantite);
+				        int new_quantite_int = Integer.parseInt(quantite);
+				        System.out.println("Old quantity: "+old_quantite);
+				        System.out.println("New quantity: "+quantite);
+				        String oldLine = nom+"\\+"+"[0-9]*";
+				        String newLine = nom+"\\+"+Integer.toString((old_quantite_int+new_quantite_int));
+				        //Replacing the old line with new line
+				        fileContents = fileContents.replaceAll(oldLine, newLine);
+				        //instantiating the FileWriter class
+				        FileWriter writer = new FileWriter(fileName);
+				        System.out.println("");
+				        System.out.println("new data: "+fileContents);
+				        writer.append(fileContents);
+				        writer.flush();
+				        writer.close();
+				        
+				        found = 1;
+				        
+				    }
+			}
+		    if(found == 0)
+		    {
+			    FileWriter fileWriter = null;
+				try {
+					fileWriter = new FileWriter(fileName, true);
+					//inherited method from java.io.OutputStreamWriter 
+					fileWriter.write(nom);
+					fileWriter.write("+");
+					fileWriter.write(quantite);
+					fileWriter.write(System.lineSeparator());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					try {
+						if (fileWriter != null) {
+							fileWriter.flush();
+							fileWriter.close();					
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+		    }
+			in.close();
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
+		
+		return 1; 
+		
+	}
+	
+	public int supprimerCommande(String nom) throws IOException
+	{
+		
+		    String fileName="./commandes.db";
+		
+			try {
+				System.out.println("Element a supprimer : "+nom);
+			    File file = new File(fileName);
+			    File temp = new File("./_temp_");
+			    PrintWriter out = new PrintWriter(new FileWriter(temp));
+			    Files.lines(file.toPath())
+			        .filter(line -> !line.contains(nom))
+			        .forEach(out::println);
+			    out.flush();
+			    out.close();
+			    Files.move(temp.toPath(), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+			    boolean success = temp.renameTo(file);
+			    System.out.println("File overwrite status : "+success);
 			}
 		    catch (Exception ee) {
 		    	System.out.println(ee); 

@@ -24,6 +24,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+
+import Modele.commandes;
+
 import java.awt.Color;
 import javax.swing.JEditorPane;
 import java.awt.GridBagLayout;
@@ -140,6 +143,14 @@ public class Responsable extends JFrame {
 	            System.out.println("Index Selected: " + index);
 	            String s = (String) listproduits.getSelectedValue();
 	            System.out.println("Value Selected: " + s);
+	            
+	            String[] splited = s.split("\\s+");
+	            
+	            //ouvrir une fenetre
+				Creer_commande frame = new Creer_commande();
+				frame.setName(splited[0]);
+				frame.setQuantite("0");
+				frame.setVisible(true);
 			}
 		});
 
@@ -235,6 +246,11 @@ public class Responsable extends JFrame {
 	            System.out.println("Index Selected: " + index);
 	            String s = (String) list_1.getSelectedValue();
 	            System.out.println("Value Selected: " + s);
+	            
+	            String[] splited = s.split("\\s+");
+	            
+	            commandes.supprimerCommande(splited[0]);
+				
 			}
 		});
 		btnSuppr.setBounds(274, 105, 114, 23);
