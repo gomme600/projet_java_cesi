@@ -226,4 +226,7 @@ public class Responsable extends JFrame {
 	public void setLblNewLabel(String nom) {
 		this.lblNewLabel.setText(nom);
 	}
+	
+	
+	
 }
