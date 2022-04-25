@@ -24,14 +24,19 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+
+import Modele.produit;
+
 import java.awt.Color;
 import javax.swing.JEditorPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.SwingConstants;
 
 public class Gestionnaire_de_stock extends JFrame {
 
+	protected static Object listproduits;
 	private JPanel contentPane;
 	JLabel lblNewLabel;
 
@@ -68,7 +73,8 @@ public class Gestionnaire_de_stock extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Portail gestionnaire de stock");
-		lblNewLabel_1.setBounds(301, 23, 137, 14);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(182, 23, 256, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -106,7 +112,7 @@ public class Gestionnaire_de_stock extends JFrame {
 						    }
 				
 				JButton btnNewButton = new JButton("Rafraichir");
-				btnNewButton.setBounds(425, 44, 91, 23);
+				btnNewButton.setBounds(340, 136, 108, 62);
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println("Button pressed !");
@@ -132,19 +138,6 @@ public class Gestionnaire_de_stock extends JFrame {
 					
 				});
 				panel.add(btnNewButton);
-						//panel.setLayout(null);
-	
-						JButton btnCommander = new JButton("Commander");
-						btnCommander.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								int index = listproduits.getSelectedIndex();
-								System.out.println("Index Selected: " + index);
-								String s = (String) listproduits.getSelectedValue();
-								System.out.println("Value Selected: " + s);
-							}
-						});
-						btnCommander.setBounds(340, 78, 108, 23);
-						panel.add(btnCommander);
 						
 								
 								JButton btnModifier = new JButton("Modifier");
@@ -165,19 +158,56 @@ public class Gestionnaire_de_stock extends JFrame {
 											frame.setVisible(true);
 									}
 								});
-								btnModifier.setBounds(497, 78, 91, 23);
+								btnModifier.setBounds(476, 136, 108, 62);
 								panel.add(btnModifier);
 								
 								JButton btnDelete = new JButton("Supprimer");
 								btnDelete.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
+							            int index = listproduits.getSelectedIndex();
+							            System.out.println("Index Selected: " + index);
+							            String s = (String) listproduits.getSelectedValue();
+							            System.out.println("Value Selected: " + s);
+							            
+							            String[] splited = s.split("\\s+");
+							            
+							            produit.supprimerProduit(splited[0]);
+							            
+							            try {
+											FileInputStream fstream = new FileInputStream("./produits.db");
+										    DataInputStream in = new DataInputStream(fstream);
+										    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+											DefaultListModel listModel = new DefaultListModel();
+											String strLine;
+											while ((strLine = br.readLine()) != null)   
+											{
+											        listModel.addElement(strLine); 
+											        System.out.println(strLine);
+											}
+
+											listproduits.setModel(listModel);
+											in.close();
+											}
+										    catch (Exception ee) {
+										    	System.out.println(ee); 
+										    }
+										
 									}
 								});
-								btnDelete.setBounds(340, 112, 108, 23);
+								btnDelete.setBounds(340, 220, 108, 62);
 								panel.add(btnDelete);
 								
 								JButton btnAjouter = new JButton("Ajouter");
-								btnAjouter.setBounds(499, 112, 89, 23);
+								btnAjouter.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										
+										//ouvrir une fenetre
+										ajouter_produit frame = new ajouter_produit();
+										frame.setVisible(true);
+										
+									}
+								});
+								btnAjouter.setBounds(476, 220, 108, 62);
 								panel.add(btnAjouter);
 		
 

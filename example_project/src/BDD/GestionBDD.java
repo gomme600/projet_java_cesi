@@ -26,6 +26,7 @@ import static org.junit.Assert.*;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.IOException;
 
@@ -150,6 +151,29 @@ public class GestionBDD {
 		return 1; 
 		
 	}
+	public int ajouterProduit(String nom, String prix, String quantite) throws IOException
+	{
+		
+		    String fileName="./produits.db";
+		
+			try {
+				        String newLine = nom+" - "+prix+" e - "+quantite;
+				        
+				        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
+			            bw.append(newLine);
+			            bw.write(System.lineSeparator());
+			            bw.flush();
+			            bw.close();
+			            
+				        System.out.println("");
+			}
+		    catch (Exception ee) {
+		    	System.out.println(ee); 
+		    }
+		
+		return 1; 
+		
+	}
 	
 	
 	
@@ -262,6 +286,30 @@ public class GestionBDD {
 		return 1; 
 		
 	}
+	public int supprimerProduit(String nom) throws IOException
+	{
+		
+	    String fileName="./produits.db";
+	
+		try {
+			System.out.println("Element a supprimer : "+nom);
+		    File file = new File(fileName);
+		    File temp = new File("./_temp_");
+		    PrintWriter out = new PrintWriter(new FileWriter(temp));
+		    Files.lines(file.toPath())
+		        .filter(line -> !line.contains(nom))
+		        .forEach(out::println);
+		    out.flush();
+		    out.close();
+		    Files.move(temp.toPath(), Paths.get(fileName), StandardCopyOption.REPLACE_EXISTING);
+		}
+	    catch (Exception ee) {
+	    	System.out.println(ee); 
+	    }
+	
+	return 1; 
+	
+}
 	
 	public int approuveCommande(String nom, String quantite) throws IOException
 	{

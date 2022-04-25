@@ -11,8 +11,13 @@ import Controleur.GestionPresence;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.awt.event.ActionEvent;
 
 import Modele.produit;
@@ -83,10 +88,11 @@ public class ajouter_produit extends JFrame {
 		lblNewLabel_3.setBounds(73, 178, 60, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		JButton btnNewButton = new JButton("Mettre \u00E0 jour");
+		JButton btnNewButton = new JButton("Ajouter un produit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				produit.modifierProduit(textField.getText(), textField_2.getText(), textField_1.getText());
+				produit.ajouterProduit(textField.getText(), textField_2.getText(), textField_1.getText());
+				
 			}
 		});
 		btnNewButton.setBounds(73, 219, 179, 23);
