@@ -24,25 +24,7 @@ public class Creer_commande extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Etudiant frame = new Etudiant();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+	//Fenetre cree commande
 	public Creer_commande() {
 		setTitle("Modifier Produit");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

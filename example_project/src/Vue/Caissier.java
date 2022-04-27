@@ -42,25 +42,7 @@ public class Caissier extends JFrame {
 	JLabel lblNewLabel;
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Etudiant frame = new Etudiant();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+    //Fenetre caissier
 	public Caissier() {
 		setTitle("Caissier");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

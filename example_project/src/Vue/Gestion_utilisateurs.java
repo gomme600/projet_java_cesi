@@ -40,25 +40,7 @@ public class Gestion_utilisateurs extends JFrame {
 	protected static Object listproduits;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Etudiant frame = new Etudiant();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+	//Fenetre gestion utilisateur
 	public Gestion_utilisateurs() {
 		setTitle("Gestionnaire de stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

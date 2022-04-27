@@ -41,9 +41,7 @@ public class Gestionnaire_de_stock extends JFrame {
 	private JPanel contentPane;
 	JLabel lblNewLabel;
 
-	/**
-	 * Create the frame.
-	 */
+	//Fenetre gestionnaire de stock
 	public Gestionnaire_de_stock() {
 		setTitle("Gestionnaire de stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

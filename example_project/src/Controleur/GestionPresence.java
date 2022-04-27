@@ -11,8 +11,13 @@ import java.io.IOException;
 public class GestionPresence {
 
 	/**
-	 * Launch the application.
+	 * Projet JAVA
+	 * Avril 2022
+	 * Sebastian LUCAS
+	 * Morgan Bourre
 	 */
+	
+	//Lancer l'application
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -32,6 +32,8 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+//Tout ce qui est relatif à l'enregistrement et a la lecture de données
+
 public class GestionBDD {
 
 	public GestionBDD(){

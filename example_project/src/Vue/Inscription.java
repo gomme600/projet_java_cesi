@@ -37,7 +37,7 @@ public class Inscription extends JFrame {
 	private JLabel lblstatus;
 	private JButton btnNewButton;
 
-
+    //Fenetre inscription
 	public Inscription() {
 		setTitle("Inscription");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

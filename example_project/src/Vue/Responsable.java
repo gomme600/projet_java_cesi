@@ -41,9 +41,6 @@ public class Responsable extends JFrame {
 	private JPanel contentPane;
 	JLabel lblNewLabel;
 
-	/**
-	 * Create the frame.
-	 */
 	//Constructeur Responsable
 	public Responsable() {
 		//Changer le titre de la fenetre
