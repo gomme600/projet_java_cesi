@@ -24,25 +24,7 @@ public class Modifier_produit extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Etudiant frame = new Etudiant();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+	//Fenetre modifier produit
 	public Modifier_produit() {
 		setTitle("Modifier Produit");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
